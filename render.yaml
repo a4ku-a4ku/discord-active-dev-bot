@@ -1,8 +1,9 @@
 services:
   - type: web
     name: discord-active-dev-bot
-    runtime: python
+    env: python
     plan: free
+    region: oregon
     buildCommand: pip install -r requirements.txt
     startCommand: python counting_bot.py
     envVars:
