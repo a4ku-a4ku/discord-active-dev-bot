@@ -1,0 +1,13 @@
+# Secret Environment Variables - NEVER PUSH TO GITHUB
+.env
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local Runtime / State files
+badge_state.json
+*.bat
+.vscode/
+.idea/
