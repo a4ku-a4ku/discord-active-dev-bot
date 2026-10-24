@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: discord-active-dev-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python counting_bot.py
+    envVars:
+      - key: DISCORD_BOT_TOKEN
+        sync: false
+      - key: BOT_OWNER_ID
+        value: "272861288265285632"
+      - key: TARGET_CHANNEL_ID
+        value: "316391521157120012"
+      - key: SLOWMODE_SECONDS
+        value: "30"
+      - key: PORT
+        value: "10000"
