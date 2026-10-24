@@ -54,11 +54,18 @@ class DevBadgeAndCountingBot(commands.Bot):
         self.badge_state = load_badge_state()
 
     async def setup_hook(self):
-        """Sync slash commands globally with Discord."""
+        """Sync slash commands both instantly to the target guild and globally."""
         print("Registering and syncing slash commands with Discord...")
         try:
-            synced = await self.tree.sync()
-            print(f"Successfully synced {len(synced)} slash command(s).")
+            # 1. Instant sync to target guild (appears immediately in server)
+            guild_obj = discord.Object(id=TARGET_CHANNEL_ID)
+            self.tree.copy_global_to(guild=guild_obj)
+            synced_guild = await self.tree.sync(guild=guild_obj)
+            print(f"Instantly synced {len(synced_guild)} slash command(s) to guild {TARGET_CHANNEL_ID}!")
+
+            # 2. Global sync (propagates across Discord)
+            synced_global = await self.tree.sync()
+            print(f"Synced {len(synced_global)} global slash command(s).")
         except Exception as e:
             print(f"Failed to sync slash commands: {e}")
 
